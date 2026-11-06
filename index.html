@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Моите Финанси</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts за модерен шрифт -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <!-- Заглавие -->
+        <header class="header">
+            <h1>Моите Финанси 💸</h1>
+            <p class="subtitle">Контрол над средствата ти</p>
+        </header>
+
+        <!-- Общ баланс картов калкулатор -->
+        <div class="total-balance-card">
+            <span class="total-label">Общ Наличен Баланс</span>
+            <div id="totalBalance" class="total-amount">0.00 лв.</div>
+            
+            <div class="balance-split">
+                <div class="split-item">
+                    <span>💵 В кеш:</span>
+                    <strong id="cashSummary">0.00 лв.</strong>
+                </div>
+                <div class="split-divider"></div>
+                <div class="split-item">
+                    <span>💳 По карти:</span>
+                    <strong id="cardsSummary">0.00 лв.</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Секция: Портфейл Кеш (В брой) -->
+        <div class="glass-card">
+            <h3>💵 Пари в брой (Кеш)</h3>
+            <div class="cash-box-display">
+                <span id="cashBalanceDisplay" class="cash-amount">0.00 лв.</span>
+                <div class="cash-actions">
+                    <input type="number" id="cashInput" placeholder="Сума (+ или -)">
+                    <button class="btn-primary" onclick="updateCashDirectly()">Задари / Обнови</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Секция: Дебитни карти и сметки -->
+        <div class="glass-card">
+            <h3>💳 Дебитни Карти и Сметки</h3>
+            <div id="cardsList" class="cards-container">
+                <!-- Тук се зареждат картите -->
+            </div>
+            
+            <div class="add-card-form">
+                <input type="text" id="cardName" placeholder="Име на картата (напр. Revolut, ПИБ)">
+                <input type="number" id="cardBalance" placeholder="Начален баланс (лв.)">
+                <button class="btn-secondary" onclick="addCard()">Добави нова карта</button>
+            </div>
+        </div>
+
+        <!-- Секция: Преместване на пари (Трансфер между Кеш и Карти) -->
+        <div class="glass-card">
+            <h3>🔄 Трансфер (Кеш ⇄ Карта)</h3>
+            <div class="transfer-grid">
+                <div>
+                    <label>Откъде:</label>
+                    <select id="transferFrom">
+                        <option value="" disabled selected>Избери източник...</option>
+                        <option value="cash">💵 Пари в кеш</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Към къде:</label>
+                    <select id="transferTo">
+                        <option value="" disabled selected>Избери получател...</option>
+                        <option value="cash">💵 Пари в кеш</option>
+                    </select>
+                </div>
+            </div>
+            <input type="number" id="transferAmount" placeholder="Сума за преместване (лв.)">
+            <button class="btn-accent" onclick="makeTransfer()">Извърши трансфер</button>
+        </div>
+
+        <!-- Секция: Добавяне на Приход / Разход -->
+        <div class="glass-card">
+            <h3>➕ / ➖ Нова Транзакция</h3>
+            <input type="text" id="desc" placeholder="Описание (напр. Заплата, Гориво, Магазин)">
+            <input type="number" id="amount" placeholder="Сума (лв.)">
+            <div class="transfer-grid">
+                <div>
+                    <label>Тип:</label>
+                    <select id="type">
+                        <option value="income">Приход (+)</option>
+                        <option value="expense">Разход (-)</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Плащане от/към:</label>
+                    <select id="transactionSource">
+                        <option value="" disabled selected>Избери портфейл/карта...</option>
+                        <option value="cash">💵 Пари в кеш</option>
+                    </select>
+                </div>
+            </div>
+            <button class="btn-primary" onclick="addTransaction()">Добави транзакция</button>
+        </div>
+
+        <!-- История -->
+        <div class="glass-card">
+            <h3>📜 История на транзакциите</h3>
+            <ul id="transactionList" class="transaction-list">
+                <!-- Тук се зарежда историята -->
+            </ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
